@@ -1,5 +1,5 @@
 import  React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Navigate } from "react-router-dom";
 import axios from 'axios'
 
 const initialCredentials = {
@@ -8,6 +8,10 @@ const initialCredentials = {
 }
 
 function Login() {
+    if (localStorage.getItem('token')) {
+        return <Navigate to="/friends" />
+    }
+
     const navigate = useNavigate()
     const [credentials, setCredentials] = useState(initialCredentials)
 
@@ -19,7 +23,6 @@ function Login() {
         evt.preventDefault()
         axios.post('http://localhost:9000/api/login', credentials)
             .then(res => {
-                console.log(res.data)
                 localStorage.setItem('token', res.data.token)
                 navigate('/friends')
             })
