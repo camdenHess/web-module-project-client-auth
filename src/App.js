@@ -1,11 +1,24 @@
 import React from 'react';
 import './App.css';
-import { BrowserRouter as Router, Route} from 'react-router-dom';
+import { Link, Routes, Route } from 'react-router-dom';
+import Login from './components/login'
+import Friends from './components/friendslist'
 
 function App() {
   return (
-    <div className="App">
-      <h2>Client Auth Project</h2>
+    <div>
+      <ul>
+        <li>
+          <Link to='/login'>Login</Link>
+        </li>
+        <li>
+          <Link to='/friends'>Friends</Link>
+        </li>
+      </ul>
+      <Routes>
+        <Route path='login' element={<Login />} />
+        <Route path='friends' element={<Friends />} />
+      </Routes>
     </div>
   );
 }
